@@ -95,7 +95,6 @@ smart-open==2.1.1
 soupsieve==2.0.1
 tabulate==0.8.7
 tqdm==4.48.2
-Twisted @ file:///C:/Users/mrahn/Desktop/Twisted-20.3.0-cp38-cp38-win32.whl
 tzlocal==2.1
 unicodecsv==0.14.1
 uritemplate==3.0.1
