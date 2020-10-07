@@ -11,4 +11,6 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     return "<h1>Welcome to my check similarity server</h1>"
-app.run()
+
+if __name__ == "__main__":
+    app.run()
