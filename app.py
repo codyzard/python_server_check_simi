@@ -38,8 +38,13 @@ def index():
         cosine_similarities = cosine_similarity(doc_vectors[0:1], doc_vectors).flatten()
         document_scores = [item.item() for item in cosine_similarities[1:]]
         print(str(document_scores) +"\t")
+        check = "";
         if(any(i >= 0.85 for i in document_scores)):
-            return "1"
+            check = "1"
         else: 
-            return "0"
-app.run(debug=True, host='127.0.0.1', port=5000)
+            check = "0"
+        return check
+@app.route('/')
+def main():
+    return "<h1>Welcome to my check similarity server</h1>"
+app.run()
