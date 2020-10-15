@@ -7,7 +7,7 @@ from sklearn.metrics.pairwise import linear_kernel, cosine_similarity
 import gensim
 from string import punctuation
 app = Flask(__name__)
-
+app.config["DEBUG"] = True
 STOP_WORD= []
 with codecs.open("vietnamese-stopwords-dash.txt", encoding='utf-8') as f:
     for line in f:
@@ -28,12 +28,13 @@ def index():
     if request.method == 'GET':
         return 'Hello world'
     elif request.method == 'POST':
+        if(any(i == None for i in request.json['from_db'])): return "0"
         db = request.json['from_db']
         data_check = request.json['data_check']
         arr_filter = []
         data_filter = filter_doc(data_check)
         for item in db:
-            arr_filter += [filter_doc(item['hot_content'])]
+            arr_filter += [filter_doc(item)]
         doc_vectors = TfidfVectorizer().fit_transform([data_filter] + arr_filter)
         cosine_similarities = cosine_similarity(doc_vectors[0:1], doc_vectors).flatten()
         document_scores = [item.item() for item in cosine_similarities[1:]]
